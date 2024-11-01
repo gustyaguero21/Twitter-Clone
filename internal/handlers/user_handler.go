@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"twitter-clone/internal/models"
 	"twitter-clone/internal/services"
+	"twitter-clone/internal/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +18,7 @@ func NewUserHandler(service services.UserServices) *UserHandler {
 }
 
 func (u *UserHandler) CreateUserHandler(ctx *gin.Context) {
+
 	ctx.Header("Content-Type", "application/json")
 
 	user := models.Users{}
@@ -28,7 +30,7 @@ func (u *UserHandler) CreateUserHandler(ctx *gin.Context) {
 		return
 	}
 
-	createdUser, err := u.Service.CreateUser(ctx, user)
+	_, err := u.Service.CreateUser(ctx, user)
 	if err != nil {
 		ctx.JSON(400, gin.H{
 			"error": err.Error(),
@@ -36,13 +38,5 @@ func (u *UserHandler) CreateUserHandler(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(200, createUserResponse(http.StatusOK, "User created successfully", createdUser))
-}
-
-func createUserResponse(status int, message string, user interface{}) models.UserResponse {
-	return models.UserResponse{
-		Status:  status,
-		Message: message,
-		User:    user,
-	}
+	ctx.JSON(200, utils.CreateResponse(http.StatusOK, "User created successfully"))
 }

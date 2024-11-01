@@ -29,4 +29,6 @@ const (
 		);`
 
 	SaveUserQuery = `INSERT INTO users (id, username) VALUES (?,?);`
+
+	FollowUserQuery = `INSERT INTO followers (follower_username,following_username) VALUES (?,?);`
 )
