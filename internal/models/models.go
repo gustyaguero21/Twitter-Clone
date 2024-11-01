@@ -9,14 +9,20 @@ type Users struct {
 }
 
 type Follows struct {
-	ID         uuid.UUID
-	FollowerID int64
-	FollowedID int64
+	ID         uuid.UUID `json:"id"`
+	FollowerID int64     `json:"follower_id"`
+	FollowedID int64     `json:"followed_id"`
 }
 
 type Tweets struct {
-	ID       uuid.UUID
-	UserID   int64
-	Content  string
-	PostedAt int64
+	ID       uuid.UUID `json:"id"`
+	UserID   int64     `json:"user_id"`
+	Content  string    `json:"content"`
+	PostedAt int64     `json:"posted_at"`
+}
+
+type UserResponse struct {
+	Status  int         `json:"status"`
+	Message string      `json:"message"`
+	User    interface{} `json:"user"`
 }
