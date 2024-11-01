@@ -28,4 +28,6 @@ func UrlMapping(r *gin.Engine) {
 
 	router.POST("/follow-user/:username", followerHandler.FollowUser)
 
+	router.GET("/followers/:username", followerHandler.Following)
+
 }

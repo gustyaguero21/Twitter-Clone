@@ -33,6 +33,7 @@ func (f *FollowerHandler) FollowUser(ctx *gin.Context) {
 	}
 
 	_, err := f.Service.FollowUser(follower, followers.FollowingUsername)
+
 	if err != nil {
 		ctx.JSON(400, gin.H{
 			"error": err.Error(),
@@ -41,4 +42,28 @@ func (f *FollowerHandler) FollowUser(ctx *gin.Context) {
 	}
 	message := "Now you're following " + followers.FollowingUsername
 	ctx.JSON(200, utils.CreateResponse(http.StatusOK, message))
+}
+
+func (f *FollowerHandler) Following(ctx *gin.Context) {
+	ctx.Header("Content-Type", "application/json")
+
+	username := ctx.Param("username")
+
+	following_users, err := f.Service.ShowFollowers(username)
+
+	if len(following_users) == 0 {
+		ctx.JSON(200, gin.H{
+			"message": "user aleady not following users",
+		})
+		return
+	}
+
+	if err != nil {
+		ctx.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	ctx.JSON(200, following_users)
 }
