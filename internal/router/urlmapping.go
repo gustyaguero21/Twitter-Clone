@@ -19,8 +19,13 @@ func UrlMapping(r *gin.Engine) {
 	userService := services.NewService(&repository)
 	userHandler := handlers.NewUserHandler(*userService)
 
+	followerService := services.NewFollowerService(&repository)
+	followerHandler := handlers.NewFollowerHandler(*followerService)
+
 	router := r.Group("twitter-clone/api/v1")
 
 	router.POST("/create-user", userHandler.CreateUserHandler)
+
+	router.POST("/follow-user/:username", followerHandler.FollowUser)
 
 }
