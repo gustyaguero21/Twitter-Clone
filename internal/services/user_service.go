@@ -8,18 +8,19 @@ import (
 	"github.com/google/uuid"
 )
 
-type Services struct {
+type UserServices struct {
 	Repo *repository.Repository
 }
 
-func NewService(repo *repository.Repository) *Services {
-	return &Services{Repo: repo}
+func NewService(repo *repository.Repository) *UserServices {
+	return &UserServices{Repo: repo}
 }
 
-func (s *Services) CreateUser(ctx context.Context, user models.Users) (models.Users, error) {
+func (s *UserServices) CreateUser(ctx context.Context, user models.Users) (models.Users, error) {
 	newUser := models.Users{
 		ID:       uuid.New(),
 		Username: user.Username,
+		Follows:  user.Follows,
 	}
 
 	userRepo := repository.NewUserRepository(*s.Repo)

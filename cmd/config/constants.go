@@ -20,19 +20,13 @@ const (
 		id TEXT PRIMARY KEY NOT NULL,
 		username TEXT NOT NULL);`
 
-	CreateFollowsTable = `CREATE TABLE IF NOT EXISTS follows (
-		id TEXT PRIMARY KEY NOT NULL,
-		follower_id INTEGER NOT NULL, 
-		followed_id INTEGER NOT NULL, 
-		FOREIGN KEY (follower_id) REFERENCES users(id), 
-		FOREIGN KEY (followed_id) REFERENCES users(id) );`
-
-	CreateTweetsTable = `CREATE TABLE IF NOT EXISTS tweets (
-		id TEXT PRIMARY KEY NOT NULL,
-		user_id TEXT NOT NULL,
-		content TEXT NOT NULL,
-		posted_at INTEGER NOT NULL,
-		FOREIGN KEY (user_id) REFERENCES users (id));`
+	CreateFollowerTable = `CREATE TABLE IF NOT EXISTS followers (
+		follower_username TEXT,
+		following_username TEXT,
+		FOREIGN KEY (follower_username) REFERENCES users(username),
+		FOREIGN KEY (following_username) REFERENCES users(username),
+		PRIMARY KEY (follower_username, following_username)
+		);`
 
 	SaveUserQuery = `INSERT INTO users (id, username) VALUES (?,?);`
 )

@@ -32,7 +32,7 @@ func NewRepository() (Repository, error) {
 		return Repository{}, fmt.Errorf("error connecting with database. Error: %v", err)
 	}
 
-	tables := []string{config.CreateUserTable, config.CreateTweetsTable, config.CreateFollowsTable}
+	tables := []string{config.CreateUserTable, config.CreateFollowerTable}
 
 	for _, table := range tables {
 		if err := createTable(DB, table); err != nil {
