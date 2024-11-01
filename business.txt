@@ -1,6 +1,6 @@
 1. La aplicación usa una base de datos SQLite para los usuarios y los tweets, pero en un entorno real, se recomienda usar PostgreSQL para datos persistentes y Redis para cache de timelines.
    
-2. Se asume que todos los usuarios son válidos y no se requiere autenticación. Cada usuario está identificado únicamente por su ID.
+2. Se asume que todos los usuarios son válidos y no se requiere autenticación. Tampoco se verificara existencia de registro de usuarios y cada usuario está identificado únicamente por su ID.
 
 3. El numero maximo de usuarios que puede seguir, sera de 10. Esto le restara complejidad a la aplicación.
 
