@@ -33,4 +33,6 @@ const (
 		content TEXT NOT NULL,
 		posted_at INTEGER NOT NULL,
 		FOREIGN KEY (user_id) REFERENCES users (id));`
+
+	SaveUserQuery = `INSERT INTO users (id, username) VALUES (?,?);`
 )
