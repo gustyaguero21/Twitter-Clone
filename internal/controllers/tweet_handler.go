@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"reflect"
 	"twitter-clone/internal/models"
 	"twitter-clone/internal/services"
 
@@ -20,6 +21,13 @@ func (t *TweetHandler) CreatePostHandler(ctx *gin.Context) {
 	ctx.Header("Content-Type", "application/json")
 
 	username := ctx.Param("username")
+
+	if username == "" || reflect.TypeOf(username).Kind() != reflect.String {
+		ctx.JSON(400, gin.H{
+			"error": "invalid query param",
+		})
+		return
+	}
 
 	tweet := models.Tweets{}
 
@@ -47,11 +55,25 @@ func (t *TweetHandler) TimelineHandler(ctx *gin.Context) {
 
 	username := ctx.Param("username")
 
+	if username == "" || reflect.TypeOf(username).Kind() != reflect.String {
+		ctx.JSON(400, gin.H{
+			"error": "invalid query param",
+		})
+		return
+	}
+
 	getTimeline, getErr := t.Service.ShowTimeline(username)
 
 	if getErr != nil {
 		ctx.JSON(400, gin.H{
 			"error": getErr.Error(),
+		})
+		return
+	}
+
+	if len(getTimeline) == 0 {
+		ctx.JSON(400, gin.H{
+			"message": "user currently not following any user",
 		})
 		return
 	}
