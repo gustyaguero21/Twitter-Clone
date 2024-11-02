@@ -21,7 +21,7 @@ Una API simple de clon de Twitter en Go, que permite a los usuarios registrarse,
 
 3. Ejecuta la aplicación:
     ```bash
-        go run cmd/main.go
+        go run cmd/api/main.go
 
 ## Notas
 
