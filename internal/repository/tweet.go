@@ -3,11 +3,8 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-	"time"
 	"twitter-clone/cmd/config"
 	"twitter-clone/internal/models"
-
-	"github.com/google/uuid"
 )
 
 type PostRepository struct {
@@ -18,9 +15,13 @@ func NewPostRepository(repo Repository) *PostRepository {
 	return &PostRepository{db: repo.db}
 }
 
-func (pr *PostRepository) SavePost(id uuid.UUID, user string, content string, posted_at time.Time) error {
+func (pr *PostRepository) SavePost(tweet models.Tweets) error {
 
-	_, err := pr.db.Exec(config.CreatePostQuery, id.String(), user, content, posted_at.Format("2006-01-02 15:04:05"))
+	if tweet.Content == "" {
+		return fmt.Errorf("content cannot be empty")
+	}
+
+	_, err := pr.db.Exec(config.CreatePostQuery, tweet.ID, tweet.User, tweet.Content, tweet.PostedAt.Format("2006-01-02 15:04:05"))
 
 	if err != nil {
 		return fmt.Errorf("error creating post. Error: %v", err)
