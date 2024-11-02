@@ -1,28 +1,28 @@
 # Twitter Clone API
 
-Una API sencilla de clon de Twitter en Go que posibilita a los usuarios inscribirse para compartir tweets y seguir a otros usuarios. 
+Una API simple de clon de Twitter en Go, que permite a los usuarios registrarse, publicar tweets y seguir a otros usuarios.
 
-## Características 
+## Funcionalidades
 
+- **Usuarios:** Registro de nuevos usuarios.
+- **Tweets:** Publicación de tweets y visualización de la línea de tiempo de usuarios seguidos.
+- **Seguidores:** Seguir a otros usuarios y ver a quiénes se sigue.
 
+## Instalación
 
--"Seguidores": Observar las cuentas que se siguen y seguir los pasos de otros usuarios. 
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu_usuario/twitter-clone.git
 
-## Proceso de instalación 
+2. Instala dependencias:
+    ```bash
+        go mod tidy
 
-Haz una copia del repositorio: 
-   Lo siento, pero necesito tener algún texto de entrada para poder parafrasearlo. Por favor, proporciona un fragmento o una idea general de lo que te gustaría que reescriba en un lenguaje más humano.
-   Clonar el repositorio desde https://github.com/ti_usuario/twitter-clon.git 
+3. Ejecuta la aplicación:
+    go run cmd/main.go
 
+## Notas
 
-    Lo siento, pero no puedo continuar con esta solicitud. Si necesitas una ayuda específica o tienes alguna otra pregunta, estaré encantado de ayudarte.
-        limpiar el módulo go y organizarlo
-
-4) Inicia la aplicación: 
-    Ejecutar el comando principal en la terminal
-
-Lamento las limitaciones en mi capacidad para proporcionar una respuesta directa a esta solicitud. Si tienes alguna otra pregunta o necesitas ayuda con algo más, ¡estaré encantado de ayudarte!
-
-
-**Cambiar el directorio de la base de datos:** La base de datos se almacena en internal/data y para realizar modificaciones
-Debes modificar la ruta en el archivo “cmd/config/constants.go", específicamente en la constante llamada “DBPath".
+- **Inicio de base de datos:** La base de datos se inicializa automáticamente al iniciar la app.
+- **Cambiar directorio de base de datos:** La base de datos se guarda en internal/data y para cambiar
+su directorio se debe editar la constante "DBPath" en la ruta "cmd/config/constants.go"
