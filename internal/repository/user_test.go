@@ -27,7 +27,7 @@ func Test_SaveUser_Success(t *testing.T) {
 		t.Fatal("Error creating user table")
 	}
 
-	userRepo := NewUserRepository(Repository{db: db})
+	userRepo := NewUserRepository(Repository{Db: db})
 
 	user := models.Users{
 		ID:       uuid.New(),
@@ -60,7 +60,7 @@ func Test_SaveUser_Error(t *testing.T) {
 		t.Fatal("Error creating user table")
 	}
 
-	userRepo := NewUserRepository(Repository{db: db})
+	userRepo := NewUserRepository(Repository{Db: db})
 
 	_, err = db.Exec(config.SaveUserQuery, "1", "pepe")
 

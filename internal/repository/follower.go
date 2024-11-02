@@ -8,16 +8,16 @@ import (
 )
 
 type FollowerRepository struct {
-	db *sql.DB
+	Db *sql.DB
 }
 
 func NewFollowerRepository(repo Repository) *FollowerRepository {
-	return &FollowerRepository{db: repo.db}
+	return &FollowerRepository{Db: repo.Db}
 }
 
 func (fr *FollowerRepository) Follow(follower_username, following_username string) error {
 
-	_, err := fr.db.Exec(config.FollowUserQuery, follower_username, following_username)
+	_, err := fr.Db.Exec(config.FollowUserQuery, follower_username, following_username)
 
 	if err != nil {
 		return fmt.Errorf("user already follow this user. Error: %v", err)
@@ -29,7 +29,7 @@ func (fr *FollowerRepository) SearchFollowers(username string) ([]models.Followe
 
 	var following_list []models.Followers
 
-	rows, err := fr.db.Query(config.ShowFollowersQuery, username)
+	rows, err := fr.Db.Query(config.ShowFollowersQuery, username)
 
 	if err != nil {
 		return nil, fmt.Errorf("error searching followers. Error: %v", err)

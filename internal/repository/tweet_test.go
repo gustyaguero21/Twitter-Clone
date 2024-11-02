@@ -28,7 +28,7 @@ func Test_SavePost_Success(t *testing.T) {
 		t.Fatal("Error creating tweets table")
 	}
 
-	postRepo := NewPostRepository(Repository{db: db})
+	postRepo := NewPostRepository(Repository{Db: db})
 
 	tweet := models.Tweets{
 		ID:       uuid.New(),
@@ -63,7 +63,7 @@ func Test_SavePost_Error(t *testing.T) {
 		t.Fatal("Error creating tweets table")
 	}
 
-	postRepo := NewPostRepository(Repository{db: db})
+	postRepo := NewPostRepository(Repository{Db: db})
 
 	tweet := models.Tweets{
 		ID:       uuid.New(),
@@ -104,7 +104,7 @@ func Test_GetTimeline_Success(t *testing.T) {
 		t.Fatal("Error creating followers table")
 	}
 
-	postRepo := NewPostRepository(Repository{db: db})
+	postRepo := NewPostRepository(Repository{Db: db})
 
 	tweet := models.Tweets{
 		ID:       uuid.New(),
@@ -151,7 +151,7 @@ func Test_GetTimeline_Error(t *testing.T) {
 		t.Fatal("Error creating followers table")
 	}
 
-	postRepo := NewPostRepository(Repository{db: db})
+	postRepo := NewPostRepository(Repository{Db: db})
 
 	tweet := models.Tweets{
 		ID:       uuid.New(),
