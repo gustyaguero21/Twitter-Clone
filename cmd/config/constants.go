@@ -11,6 +11,8 @@ const (
 const (
 	Driver = "sqlite"
 	DbPath = "./internal/data/database.db"
+
+	MaxContentLength = 280
 )
 
 //Database queries
@@ -28,9 +30,18 @@ const (
 		PRIMARY KEY (follower_username, following_username)
 		);`
 
+	CreateTweetsTable = `CREATE TABLE IF NOT EXISTS tweets (
+		id TEXT PRIMARY KEY NOT NULL,
+		username TEXT NOT NULL,
+		content VARCHAR(280) NOT NULL,
+		posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+		FOREIGN KEY (username) REFERENCES users(username));`
+
 	SaveUserQuery = `INSERT INTO users (id, username) VALUES (?,?);`
 
 	FollowUserQuery = `INSERT INTO followers (follower_username,following_username) VALUES (?,?);`
 
 	ShowFollowersQuery = `SELECT following_username FROM followers WHERE follower_username = ?;`
+
+	CreatePostQuery = `INSERT INTO tweets (id, username, content) VALUES (?,?,?);`
 )

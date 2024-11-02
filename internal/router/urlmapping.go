@@ -16,18 +16,23 @@ func UrlMapping(r *gin.Engine) {
 		log.Fatal("error initializing database.")
 	}
 
-	userService := services.NewService(&repository)
+	userService := services.NewUserService(&repository)
 	userHandler := handlers.NewUserHandler(*userService)
 
 	followerService := services.NewFollowerService(&repository)
 	followerHandler := handlers.NewFollowerHandler(*followerService)
 
+	postService := services.NewTweetService(&repository)
+	postHandler := handlers.NewTweetHandler(*postService)
+
 	router := r.Group("twitter-clone/api/v1")
 
 	router.POST("/create-user", userHandler.CreateUserHandler)
 
-	router.POST("/follow-user/:username", followerHandler.FollowUser)
+	router.POST("/follow-user/:username", followerHandler.FollowUserHandler)
 
 	router.GET("/followers/:username", followerHandler.Following)
+
+	router.POST("/create-post/:username", postHandler.CreatePostHandler)
 
 }
