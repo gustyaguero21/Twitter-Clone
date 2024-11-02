@@ -1,4 +1,4 @@
-package handlers
+package controllers
 
 import (
 	"twitter-clone/internal/models"
@@ -16,6 +16,7 @@ func NewTweetHandler(service services.TweetServices) *TweetHandler {
 }
 
 func (t *TweetHandler) CreatePostHandler(ctx *gin.Context) {
+
 	ctx.Header("Content-Type", "application/json")
 
 	username := ctx.Param("username")
@@ -38,4 +39,22 @@ func (t *TweetHandler) CreatePostHandler(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(200, createdPost)
+}
+
+func (t *TweetHandler) TimelineHandler(ctx *gin.Context) {
+
+	ctx.Header("Content-Type", "application/json")
+
+	username := ctx.Param("username")
+
+	getTimeline, getErr := t.Service.ShowTimeline(username)
+
+	if getErr != nil {
+		ctx.JSON(400, gin.H{
+			"error": getErr.Error(),
+		})
+		return
+	}
+
+	ctx.JSON(200, getTimeline)
 }
