@@ -7,15 +7,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type TweetHandler struct {
+type TweetController struct {
 	Service services.TweetServices
 }
 
-func NewTweetHandler(service services.TweetServices) *TweetHandler {
-	return &TweetHandler{Service: service}
+func NewTweetController(service services.TweetServices) *TweetController {
+	return &TweetController{Service: service}
 }
 
-func (t *TweetHandler) CreatePostHandler(ctx *gin.Context) {
+func (t *TweetController) CreatePostController(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json")
 
@@ -42,7 +42,7 @@ func (t *TweetHandler) CreatePostHandler(ctx *gin.Context) {
 	ctx.JSON(200, createdPost)
 }
 
-func (t *TweetHandler) TimelineHandler(ctx *gin.Context) {
+func (t *TweetController) TimelineController(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json")
 

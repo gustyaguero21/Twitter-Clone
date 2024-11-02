@@ -9,15 +9,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UserHandler struct {
+type UserController struct {
 	Service services.UserServices
 }
 
-func NewUserHandler(service services.UserServices) *UserHandler {
-	return &UserHandler{Service: service}
+func NewUserController(service services.UserServices) *UserController {
+	return &UserController{Service: service}
 }
 
-func (u *UserHandler) CreateUserHandler(ctx *gin.Context) {
+func (u *UserController) CreateUserController(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json")
 
