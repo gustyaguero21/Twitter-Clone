@@ -6,3 +6,4 @@
 
 4. Los tweets son limitados a 280 caracteres. Si el usuario intenta publicar un tweet más largo, se devolverá un error.
 
+5. Ha sido omitido todo tipo de control o verificacion en los controladores, solo manejo de errores.

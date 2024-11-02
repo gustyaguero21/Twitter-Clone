@@ -40,7 +40,7 @@ func (pr *PostRepository) GetTimeline(username string) ([]models.Tweets, error) 
 	var tweets []models.Tweets
 	for rows.Next() {
 		var tweet models.Tweets
-		if err := rows.Scan(&tweet.User, &tweet.Content, &tweet.PostedAt); err != nil {
+		if err := rows.Scan(&tweet.ID, &tweet.User, &tweet.Content, &tweet.PostedAt); err != nil {
 			return nil, err
 		}
 		tweets = append(tweets, tweet)

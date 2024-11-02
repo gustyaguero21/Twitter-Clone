@@ -52,6 +52,7 @@ func (ts *TweetServices) ShowTimeline(username string) ([]models.Tweets, error) 
 	tweetChannel := make(chan []models.Tweets)
 
 	go func() {
+
 		tweetRepo := repository.NewPostRepository(*ts.Repo)
 
 		tweetList, tweetErr := tweetRepo.GetTimeline(username)
