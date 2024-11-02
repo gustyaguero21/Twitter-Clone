@@ -13,6 +13,7 @@ Una API simple de clon de Twitter en Go, que permite a los usuarios registrarse,
 1. Clona el repositorio:
    ```bash
         git clone https://github.com/tu_usuario/twitter-clone.git
+        cd cd Twitter-Clone/
 
 2. Instala dependencias:
     ```bash
