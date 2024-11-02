@@ -49,13 +49,20 @@ func (ts *TweetServices) validate(content string) error {
 
 func (ts *TweetServices) ShowTimeline(username string) ([]models.Tweets, error) {
 
-	tweetRepo := repository.NewPostRepository(*ts.Repo)
+	tweetChannel := make(chan []models.Tweets)
 
-	tweetList, tweetErr := tweetRepo.GetTimeline(username)
+	go func() {
+		tweetRepo := repository.NewPostRepository(*ts.Repo)
 
-	if tweetErr != nil {
-		return []models.Tweets{}, tweetErr
-	}
+		tweetList, tweetErr := tweetRepo.GetTimeline(username)
+
+		if tweetErr != nil {
+			return
+		}
+		tweetChannel <- tweetList
+	}()
+
+	tweetList := <-tweetChannel
+
 	return tweetList, nil
-
 }
