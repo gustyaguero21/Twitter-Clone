@@ -57,7 +57,7 @@ func (t *TweetHandler) TimelineHandler(ctx *gin.Context) {
 		return
 	}
 	if len(getTimeline) == 0 {
-		ctx.JSON(400, gin.H{
+		ctx.JSON(200, gin.H{
 			"message": "user currently not following any user",
 		})
 		return
