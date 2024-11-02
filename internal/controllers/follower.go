@@ -9,15 +9,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type FollowerHandler struct {
+type FollowerController struct {
 	Service services.FollowerServices
 }
 
-func NewFollowerHandler(service services.FollowerServices) *FollowerHandler {
-	return &FollowerHandler{Service: service}
+func NewFollowerController(service services.FollowerServices) *FollowerController {
+	return &FollowerController{Service: service}
 }
 
-func (f *FollowerHandler) FollowUserHandler(ctx *gin.Context) {
+func (f *FollowerController) FollowUserController(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json")
 
@@ -32,7 +32,7 @@ func (f *FollowerHandler) FollowUserHandler(ctx *gin.Context) {
 		return
 	}
 
-	_, err := f.Service.FollowUser(follower, followers.FollowingUsername)
+	_, err := f.Service.FollowUser(ctx, follower, followers.FollowingUsername)
 
 	if err != nil {
 		ctx.JSON(400, gin.H{
@@ -45,13 +45,13 @@ func (f *FollowerHandler) FollowUserHandler(ctx *gin.Context) {
 	ctx.JSON(200, utils.CreateResponse(http.StatusOK, message))
 }
 
-func (f *FollowerHandler) Following(ctx *gin.Context) {
+func (f *FollowerController) Following(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json")
 
 	username := ctx.Param("username")
 
-	following_users, err := f.Service.ShowFollowers(username)
+	following_users, err := f.Service.ShowFollowers(ctx, username)
 
 	if len(following_users) == 0 {
 		ctx.JSON(200, gin.H{

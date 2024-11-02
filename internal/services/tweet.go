@@ -33,7 +33,7 @@ func (ts *TweetServices) CreatePost(ctx context.Context, user string, content st
 	}
 	tweetRepo := repository.NewPostRepository(*ts.Repo)
 
-	if err := tweetRepo.SavePost(newPost.ID, newPost.User, newPost.Content, newPost.PostedAt); err != nil {
+	if err := tweetRepo.SavePost(newPost); err != nil {
 		return models.Tweets{}, err
 	}
 

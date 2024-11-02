@@ -8,9 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreateTable_Success(t *testing.T) {
+func Test_CreateTable_Success(t *testing.T) {
 	//given
-	query := `CREATE TABLE IF NOT EXISTS users (id PRIMARY KEY);`
 
 	db, err := sql.Open(config.Driver, ":memory:")
 
@@ -18,14 +17,16 @@ func TestCreateTable_Success(t *testing.T) {
 		t.Fatal("Error creating database in memory")
 	}
 
+	defer db.Close()
+
 	//act
-	err = createTable(db, query)
+	err = createTable(db, config.CreateUserTable)
 
 	//asserts
 	assert.NoError(t, err)
 }
 
-func TestCreateTable_Error(t *testing.T) {
+func Test_CreateTable_Error(t *testing.T) {
 	//given
 	query := `CREATE error IF NOT EXISTS users (id PRIMARY KEY);`
 
@@ -34,6 +35,8 @@ func TestCreateTable_Error(t *testing.T) {
 	if err != nil {
 		t.Fatal("Error creating database in memory")
 	}
+
+	defer db.Close()
 
 	//act
 	err = createTable(db, query)

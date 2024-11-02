@@ -1,6 +1,7 @@
 package services
 
 import (
+	"context"
 	"twitter-clone/internal/models"
 	"twitter-clone/internal/repository"
 )
@@ -13,7 +14,7 @@ func NewFollowerService(repo *repository.Repository) *FollowerServices {
 	return &FollowerServices{Repo: repo}
 }
 
-func (fs *FollowerServices) FollowUser(follower, followed string) (models.Followers, error) {
+func (fs *FollowerServices) FollowUser(ctx context.Context, follower, followed string) (models.Followers, error) {
 
 	newFollower := models.Followers{
 		FollowerUsername:  follower,
@@ -28,7 +29,7 @@ func (fs *FollowerServices) FollowUser(follower, followed string) (models.Follow
 	return newFollower, nil
 }
 
-func (fs *FollowerServices) ShowFollowers(username string) ([]string, error) {
+func (fs *FollowerServices) ShowFollowers(ctx context.Context, username string) ([]string, error) {
 
 	followRepo := repository.FollowerRepository(*fs.Repo)
 

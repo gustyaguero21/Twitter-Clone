@@ -10,7 +10,7 @@ import (
 )
 
 type Repository struct {
-	db *sql.DB
+	Db *sql.DB
 }
 
 func NewRepository() (Repository, error) {
@@ -41,7 +41,7 @@ func NewRepository() (Repository, error) {
 		}
 	}
 
-	return Repository{db: DB}, nil
+	return Repository{Db: DB}, nil
 }
 
 func createTable(db *sql.DB, query string) error {
