@@ -39,7 +39,7 @@ const (
 
 	SaveUserQuery = `INSERT INTO users (id, username) VALUES (?,?);`
 
-	ExistUserQuery = `SELECT EXISTS(SELECT 1 FROM users WHERE id = ? OR username = ?);`
+	ExistUserQuery = `SELECT EXISTS(SELECT 1 FROM users WHERE username = ?);`
 
 	FollowUserQuery = `INSERT INTO followers (follower_username,following_username) VALUES (?,?);`
 

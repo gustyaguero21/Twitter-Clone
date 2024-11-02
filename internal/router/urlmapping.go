@@ -12,6 +12,7 @@ import (
 func UrlMapping(r *gin.Engine) {
 
 	repository, err := repository.NewRepository()
+
 	if err != nil {
 		log.Fatal("error initializing database.")
 	}
@@ -33,7 +34,7 @@ func UrlMapping(r *gin.Engine) {
 
 	router.GET("/followers/:username", followerHandler.Following)
 
-	router.POST("/create-post/:username", postHandler.CreatePostHandler)
+	router.POST("/create-tweet/:username", postHandler.CreatePostHandler)
 
 	router.GET("/timeline/:username", postHandler.TimelineHandler)
 

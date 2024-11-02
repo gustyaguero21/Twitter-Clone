@@ -16,6 +16,7 @@ type Repository struct {
 func NewRepository() (Repository, error) {
 
 	dataDir := "./internal/data"
+
 	if _, err := os.Stat(dataDir); os.IsNotExist(err) {
 		if err := os.Mkdir(dataDir, os.ModePerm); err != nil {
 			return Repository{}, fmt.Errorf("error creating database directory. Error: %v", err)
@@ -44,9 +45,12 @@ func NewRepository() (Repository, error) {
 }
 
 func createTable(db *sql.DB, query string) error {
+
 	_, err := db.Exec(query)
+
 	if err != nil {
 		return fmt.Errorf("error creating table. Error: %v", err)
 	}
+
 	return nil
 }

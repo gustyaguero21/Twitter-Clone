@@ -20,22 +20,24 @@ func (ur *UserRepository) SaveUser(user models.Users) error {
 
 	ctx := context.Background()
 
-	if ur.existsUser(ctx, user.ID.String(), user.Username) {
-		return fmt.Errorf("user with ID %s and username %s already exists", user.ID.String(), user.Username)
+	if ur.existsUser(ctx, user.Username) {
+		return fmt.Errorf("user already exists")
 	}
 
 	_, err := ur.db.Exec(config.SaveUserQuery, user.ID, user.Username)
+
 	if err != nil {
 		return fmt.Errorf("error saving user on database. Error: %v", err)
 	}
 	return nil
 }
 
-func (ur *UserRepository) existsUser(ctx context.Context, id, username string) bool {
+func (ur *UserRepository) existsUser(ctx context.Context, username string) bool {
 
 	var count int
 
-	err := ur.db.QueryRowContext(ctx, config.ExistUserQuery, id, username).Scan(&count)
+	err := ur.db.QueryRowContext(ctx, config.ExistUserQuery, username).Scan(&count)
+
 	if err != nil {
 		return false
 	}

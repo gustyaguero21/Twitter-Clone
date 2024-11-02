@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"net/http"
-	"reflect"
 	"twitter-clone/internal/models"
 	"twitter-clone/internal/services"
 	"twitter-clone/internal/utils"
@@ -24,13 +23,6 @@ func (f *FollowerHandler) FollowUserHandler(ctx *gin.Context) {
 
 	follower := ctx.Param("username")
 
-	if follower == "" || reflect.TypeOf(follower).Kind() != reflect.String {
-		ctx.JSON(400, gin.H{
-			"error": "invalid query param",
-		})
-		return
-	}
-
 	followers := models.Followers{}
 
 	if err := ctx.ShouldBindJSON(&followers); err != nil {
@@ -49,20 +41,15 @@ func (f *FollowerHandler) FollowUserHandler(ctx *gin.Context) {
 		return
 	}
 	message := "Now you're following " + followers.FollowingUsername
+
 	ctx.JSON(200, utils.CreateResponse(http.StatusOK, message))
 }
 
 func (f *FollowerHandler) Following(ctx *gin.Context) {
+
 	ctx.Header("Content-Type", "application/json")
 
 	username := ctx.Param("username")
-
-	if username == "" || reflect.TypeOf(username).Kind() != reflect.String {
-		ctx.JSON(400, gin.H{
-			"error": "invalid query param",
-		})
-		return
-	}
 
 	following_users, err := f.Service.ShowFollowers(username)
 

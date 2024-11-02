@@ -17,6 +17,7 @@ func NewUserService(repo *repository.Repository) *UserServices {
 }
 
 func (us *UserServices) CreateUser(ctx context.Context, user models.Users) (models.Users, error) {
+
 	newUser := models.Users{
 		ID:       uuid.New(),
 		Username: user.Username,

@@ -10,6 +10,7 @@ import (
 func main() {
 
 	_, err := repository.NewRepository()
+
 	if err != nil {
 		fmt.Println("Error initializing db")
 	}
