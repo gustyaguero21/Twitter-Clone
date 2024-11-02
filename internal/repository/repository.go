@@ -15,7 +15,7 @@ type Repository struct {
 
 func NewRepository() (Repository, error) {
 
-	dataDir := "./internal/data"
+	dataDir := config.DBInitialize
 
 	if _, err := os.Stat(dataDir); os.IsNotExist(err) {
 		if err := os.Mkdir(dataDir, os.ModePerm); err != nil {

@@ -9,8 +9,9 @@ const (
 //Database params
 
 const (
-	Driver = "sqlite"
-	DbPath = "./internal/data/database.db"
+	Driver       = "sqlite"
+	DBInitialize = "./internal/data"
+	DbPath       = "./internal/data/database.db"
 
 	MaxContentLength = 280
 )
