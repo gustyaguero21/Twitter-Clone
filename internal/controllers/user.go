@@ -31,6 +31,7 @@ func (u *UserHandler) CreateUserHandler(ctx *gin.Context) {
 	}
 
 	_, err := u.Service.CreateUser(ctx, user)
+
 	if err != nil {
 		ctx.JSON(400, gin.H{
 			"error": err.Error(),

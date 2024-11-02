@@ -39,7 +39,7 @@ const (
 
 	SaveUserQuery = `INSERT INTO users (id, username) VALUES (?,?);`
 
-	ExistUserQuery = `SELECT EXISTS(SELECT 1 FROM users WHERE id = ? OR username = ?);`
+	ExistUserQuery = `SELECT EXISTS(SELECT 1 FROM users WHERE username = ?);`
 
 	FollowUserQuery = `INSERT INTO followers (follower_username,following_username) VALUES (?,?);`
 
@@ -47,7 +47,7 @@ const (
 
 	CreatePostQuery = `INSERT INTO tweets (id, username, content) VALUES (?,?,?);`
 
-	TimelineQuery = `SELECT t.username, t.content, t.posted_at
+	TimelineQuery = `SELECT t.id, t.username, t.content, t.posted_at
 		FROM tweets t
 		JOIN followers f ON t.username = f.following_username
 		WHERE f.follower_username = ?

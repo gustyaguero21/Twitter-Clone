@@ -24,6 +24,7 @@ func (ts *TweetServices) CreatePost(ctx context.Context, user string, content st
 	if err := ts.validate(content); err != nil {
 		return models.Tweets{}, err
 	}
+
 	newPost := models.Tweets{
 		ID:       uuid.New(),
 		User:     user,
@@ -39,19 +40,12 @@ func (ts *TweetServices) CreatePost(ctx context.Context, user string, content st
 	return newPost, nil
 }
 
-func (ts *TweetServices) validate(content string) error {
-
-	if len(content) > config.MaxContentLength {
-		return fmt.Errorf("content cannot exceed 280 characters")
-	}
-	return nil
-}
-
 func (ts *TweetServices) ShowTimeline(username string) ([]models.Tweets, error) {
 
 	tweetChannel := make(chan []models.Tweets)
 
 	go func() {
+
 		tweetRepo := repository.NewPostRepository(*ts.Repo)
 
 		tweetList, tweetErr := tweetRepo.GetTimeline(username)
@@ -65,4 +59,12 @@ func (ts *TweetServices) ShowTimeline(username string) ([]models.Tweets, error) 
 	tweetList := <-tweetChannel
 
 	return tweetList, nil
+}
+
+func (ts *TweetServices) validate(content string) error {
+
+	if len(content) > config.MaxContentLength {
+		return fmt.Errorf("content cannot exceed 280 characters")
+	}
+	return nil
 }
