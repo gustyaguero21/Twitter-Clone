@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreateTable_Success(t *testing.T) {
+func Test_CreateTable_Success(t *testing.T) {
 	//given
 
 	db, err := sql.Open(config.Driver, ":memory:")
@@ -26,7 +26,7 @@ func TestCreateTable_Success(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCreateTable_Error(t *testing.T) {
+func Test_CreateTable_Error(t *testing.T) {
 	//given
 	query := `CREATE error IF NOT EXISTS users (id PRIMARY KEY);`
 

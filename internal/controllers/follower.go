@@ -32,7 +32,7 @@ func (f *FollowerHandler) FollowUserHandler(ctx *gin.Context) {
 		return
 	}
 
-	_, err := f.Service.FollowUser(follower, followers.FollowingUsername)
+	_, err := f.Service.FollowUser(ctx, follower, followers.FollowingUsername)
 
 	if err != nil {
 		ctx.JSON(400, gin.H{
@@ -51,7 +51,7 @@ func (f *FollowerHandler) Following(ctx *gin.Context) {
 
 	username := ctx.Param("username")
 
-	following_users, err := f.Service.ShowFollowers(username)
+	following_users, err := f.Service.ShowFollowers(ctx, username)
 
 	if len(following_users) == 0 {
 		ctx.JSON(200, gin.H{

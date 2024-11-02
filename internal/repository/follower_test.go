@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestFollow_Success(t *testing.T) {
+func Test_Follow_Success(t *testing.T) {
 
 	//given
 
@@ -37,7 +37,7 @@ func TestFollow_Success(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestFollow_Error(t *testing.T) {
+func Test_Follow_Error(t *testing.T) {
 
 	//given
 

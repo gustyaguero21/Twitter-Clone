@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreatePost(t *testing.T) {
+func Test_CreatePost_Success(t *testing.T) {
 
 	//given
 
