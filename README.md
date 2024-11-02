@@ -18,10 +18,9 @@ Una API simple de clon de Twitter en Go, que permite a los usuarios registrarse,
     ```bash
         go mod tidy
 
-3.Uso
--Ejecuta la aplicación:
+3. Ejecuta la aplicación:
     go run cmd/main.go
 
--Notas
+## Notas
 La base de datos se guarda en internal/data y se inicializa automáticamente al iniciar la app.
 Para configurar el tamaño máximo de los tweets o detalles de la base de datos, edita cmd/config.
