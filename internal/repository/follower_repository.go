@@ -16,7 +16,9 @@ func NewFollowerRepository(repo Repository) *FollowerRepository {
 }
 
 func (fr *FollowerRepository) Follow(follower_username, following_username string) error {
+
 	_, err := fr.db.Exec(config.FollowUserQuery, follower_username, following_username)
+
 	if err != nil {
 		return fmt.Errorf("error: You already follow this user. Error: %v", err.Error())
 	}
@@ -28,6 +30,7 @@ func (fr *FollowerRepository) SearchFollowers(username string) ([]models.Followe
 	var following_list []models.Followers
 
 	rows, err := fr.db.Query(config.ShowFollowersQuery, username)
+
 	if err != nil {
 		return nil, err
 	}

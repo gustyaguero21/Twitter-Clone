@@ -35,4 +35,6 @@ func UrlMapping(r *gin.Engine) {
 
 	router.POST("/create-post/:username", postHandler.CreatePostHandler)
 
+	router.GET("/timeline/:username", postHandler.TimelineHandler)
+
 }
