@@ -24,5 +24,5 @@ Una API simple de clon de Twitter en Go, que permite a los usuarios registrarse,
 ## Notas
 
 - **Inicio de base de datos:** La base de datos se inicializa automáticamente al iniciar la app.
-- **Cambiar directorio de base de datos:**La base de datos se guarda en internal/data y para cambiar
+- **Cambiar directorio de base de datos:** La base de datos se guarda en internal/data y para cambiar
 su directorio se debe editar la constante "DBPath" en la ruta "cmd/config/constants.go"
