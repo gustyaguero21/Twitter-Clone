@@ -1,6 +1,10 @@
 package models
 
-import "github.com/google/uuid"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type Users struct {
 	ID       uuid.UUID   `json:"id"`
@@ -11,6 +15,13 @@ type Users struct {
 type Followers struct {
 	FollowerUsername  string `json:"follower_username"`
 	FollowingUsername string `json:"following_username"`
+}
+
+type Tweets struct {
+	ID       uuid.UUID `json:"id"`
+	User     string    `json:"user"`
+	Content  string    `json:"content"`
+	PostedAt time.Time `json:"posted_at"`
 }
 
 type CreateResponse struct {

@@ -17,7 +17,7 @@ func NewFollowerHandler(service services.FollowerServices) *FollowerHandler {
 	return &FollowerHandler{Service: service}
 }
 
-func (f *FollowerHandler) FollowUser(ctx *gin.Context) {
+func (f *FollowerHandler) FollowUserHandler(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json")
 
