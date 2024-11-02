@@ -9,11 +9,11 @@ import (
 )
 
 type UserRepository struct {
-	db *sql.DB
+	Db *sql.DB
 }
 
 func NewUserRepository(repo Repository) *UserRepository {
-	return &UserRepository{db: repo.db}
+	return &UserRepository{Db: repo.Db}
 }
 
 func (ur *UserRepository) SaveUser(user models.Users) error {
@@ -24,7 +24,7 @@ func (ur *UserRepository) SaveUser(user models.Users) error {
 		return fmt.Errorf("user already exists")
 	}
 
-	_, err := ur.db.Exec(config.SaveUserQuery, user.ID, user.Username)
+	_, err := ur.Db.Exec(config.SaveUserQuery, user.ID, user.Username)
 
 	if err != nil {
 		return fmt.Errorf("error saving user on database. Error: %v", err)
@@ -36,7 +36,7 @@ func (ur *UserRepository) existsUser(ctx context.Context, username string) bool 
 
 	var count int
 
-	err := ur.db.QueryRowContext(ctx, config.ExistUserQuery, username).Scan(&count)
+	err := ur.Db.QueryRowContext(ctx, config.ExistUserQuery, username).Scan(&count)
 
 	if err != nil {
 		return false
