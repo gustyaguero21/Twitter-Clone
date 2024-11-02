@@ -13,7 +13,7 @@ Una API simple de clon de Twitter en Go, que permite a los usuarios registrarse,
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/tu_usuario/twitter-clone.git
-   cd twitter-clone
+
 2. Instala dependencias:
     ```bash
         go mod tidy
@@ -22,5 +22,7 @@ Una API simple de clon de Twitter en Go, que permite a los usuarios registrarse,
     go run cmd/main.go
 
 ## Notas
-La base de datos se guarda en internal/data y se inicializa automáticamente al iniciar la app.
-Para configurar el tamaño máximo de los tweets o detalles de la base de datos, edita cmd/config.
+
+- **Inicio de base de datos:** La base de datos se inicializa automáticamente al iniciar la app.
+- **Cambiar directorio de base de datos:**La base de datos se guarda en internal/data y para cambiar
+su directorio se debe editar la constante "DBPath" en la ruta "cmd/config/constants.go"
