@@ -19,6 +19,6 @@ func main() {
 	router := router.StartRouter()
 
 	if err := router.Run(config.Port); err != nil {
-		log.Fatalf("Error al iniciar el servidor: %v", err)
+		log.Fatalf("Error starting server: %v", err)
 	}
 }
