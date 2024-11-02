@@ -3,8 +3,6 @@ package services
 import (
 	"context"
 	"fmt"
-	"sort"
-	"sync"
 	"time"
 	"twitter-clone/cmd/config"
 	"twitter-clone/internal/models"
@@ -50,44 +48,21 @@ func (ts *TweetServices) validate(content string) error {
 }
 
 func (ts *TweetServices) ShowTimeline(username string) ([]models.Tweets, error) {
-	tweetRepo := repository.NewPostRepository(*ts.Repo)
 
-	followingUsernames, err := tweetRepo.GetFollowingUsernames(username)
-	if err != nil {
-		return nil, err
-	}
-
-	var wg sync.WaitGroup
-	tweetsChan := make(chan []models.Tweets, len(followingUsernames))
-
-	for _, followedUser := range followingUsernames {
-		wg.Add(1)
-		go func(user string) {
-			defer wg.Done()
-			tweets, err := tweetRepo.GetTimeline(user)
-			if err == nil {
-				tweetsChan <- tweets
-			}
-		}(followedUser)
-	}
+	tweetChannel := make(chan []models.Tweets)
 
 	go func() {
-		wg.Wait()
-		close(tweetsChan)
+		tweetRepo := repository.NewPostRepository(*ts.Repo)
+
+		tweetList, tweetErr := tweetRepo.GetTimeline(username)
+
+		if tweetErr != nil {
+			return
+		}
+		tweetChannel <- tweetList
 	}()
 
-	var allTweets []models.Tweets
+	tweetList := <-tweetChannel
 
-	for tweets := range tweetsChan {
-		allTweets = append(allTweets, tweets...)
-	}
-
-	sort.Slice(allTweets, func(i, j int) bool {
-		if allTweets[i].User == allTweets[j].User {
-			return allTweets[i].PostedAt.After(allTweets[j].PostedAt)
-		}
-		return allTweets[i].User < allTweets[j].User
-	})
-
-	return allTweets, nil
+	return tweetList, nil
 }
