@@ -19,7 +19,7 @@ Una API simple de clon de Twitter en Go, que permite a los usuarios registrarse,
         go mod tidy
 
 3. Ejecuta la aplicación:
-    go run cmd/main.go
+    ```go run cmd/main.go
 
 ## Notas
 
