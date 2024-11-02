@@ -2,7 +2,7 @@ package router
 
 import (
 	"log"
-	"twitter-clone/internal/handlers"
+	"twitter-clone/internal/controllers"
 	"twitter-clone/internal/repository"
 	"twitter-clone/internal/services"
 
@@ -17,13 +17,13 @@ func UrlMapping(r *gin.Engine) {
 	}
 
 	userService := services.NewUserService(&repository)
-	userHandler := handlers.NewUserHandler(*userService)
+	userHandler := controllers.NewUserHandler(*userService)
 
 	followerService := services.NewFollowerService(&repository)
-	followerHandler := handlers.NewFollowerHandler(*followerService)
+	followerHandler := controllers.NewFollowerHandler(*followerService)
 
 	postService := services.NewTweetService(&repository)
-	postHandler := handlers.NewTweetHandler(*postService)
+	postHandler := controllers.NewTweetHandler(*postService)
 
 	router := r.Group("twitter-clone/api/v1")
 
