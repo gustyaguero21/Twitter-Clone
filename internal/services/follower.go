@@ -14,16 +14,16 @@ func NewFollowerService(repo *repository.Repository) *FollowerServices {
 	return &FollowerServices{Repo: repo}
 }
 
-func (fs *FollowerServices) FollowUser(ctx context.Context, follower, followed string) (models.Followers, error) {
+func (fs *FollowerServices) FollowUser(ctx context.Context, follow models.Followers) (models.Followers, error) {
 
 	newFollower := models.Followers{
-		FollowerUsername:  follower,
-		FollowingUsername: followed,
+		FollowerUsername:  follow.FollowerUsername,
+		FollowingUsername: follow.FollowingUsername,
 	}
 
 	followRepo := repository.NewFollowerRepository(*fs.Repo)
 
-	if err := followRepo.Follow(follower, followed); err != nil {
+	if err := followRepo.Follow(follow); err != nil {
 		return models.Followers{}, err
 	}
 	return newFollower, nil

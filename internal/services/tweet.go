@@ -19,16 +19,16 @@ func NewTweetService(repo *repository.Repository) *TweetServices {
 	return &TweetServices{Repo: repo}
 }
 
-func (ts *TweetServices) CreatePost(ctx context.Context, user string, content string) (models.Tweets, error) {
+func (ts *TweetServices) CreatePost(ctx context.Context, tweet models.Tweets) (models.Tweets, error) {
 
-	if err := ts.validate(content); err != nil {
+	if err := ts.validate(tweet.Content); err != nil {
 		return models.Tweets{}, err
 	}
 
 	newPost := models.Tweets{
 		ID:       uuid.New(),
-		User:     user,
-		Content:  content,
+		User:     tweet.User,
+		Content:  tweet.Content,
 		PostedAt: time.Now(),
 	}
 	tweetRepo := repository.NewPostRepository(*ts.Repo)

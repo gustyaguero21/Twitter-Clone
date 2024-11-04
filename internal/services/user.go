@@ -21,7 +21,6 @@ func (us *UserServices) CreateUser(ctx context.Context, user models.Users) (mode
 	newUser := models.Users{
 		ID:       uuid.New(),
 		Username: user.Username,
-		Follows:  user.Follows,
 	}
 
 	userRepo := repository.NewUserRepository(*us.Repo)

@@ -1,6 +1,6 @@
 1. La aplicación usa una base de datos SQLite para los usuarios y los tweets, pero en un entorno real, se recomienda usar PostgreSQL para datos persistentes y Redis para cache de timelines.
    
-2. Se asume que todos los usuarios son válidos y no se requiere autenticación. Tampoco se verificara existencia de registro de usuarios y cada usuario está identificado por su username.
+2. Se asume que todos los usuarios son válidos y no se requiere autenticación. Se verifica si hay usuarios existentes y cada usuario está identificado por su username.
 
 3. Los tweets son limitados a 280 caracteres. Si el usuario intenta publicar un tweet más largo, se devolverá un error.
 
@@ -10,7 +10,7 @@
 
 6. Implementa concurrencia mediante go routines y channels, esto hara que pueda manejar grandes cantidades de solicitudes al tratar de obtener los tweets.
 
-7. Las constantes mas utilizadas, como: queries de sql, puertos entre otros.
+7. Las constantes mas utilizadas, como: queries de sql, puertos, se encuentran en el archivo "constants.go" dentro de "/cmd/config".
 
 8. El manejo de errores se hizo con libreria nativa de go "fmt.Errorf()" para errores en repositorio. Esto facilita el reconocimiento de errores al momento de debuggear. 
 

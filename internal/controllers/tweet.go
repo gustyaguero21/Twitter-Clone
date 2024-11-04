@@ -30,7 +30,9 @@ func (t *TweetController) CreatePostController(ctx *gin.Context) {
 		return
 	}
 
-	createdPost, createdErr := t.Service.CreatePost(ctx, username, tweet.Content)
+	tweet.User = username
+
+	createdPost, createdErr := t.Service.CreatePost(ctx, tweet)
 
 	if createdErr != nil {
 		ctx.JSON(400, gin.H{

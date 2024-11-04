@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"testing"
 	"twitter-clone/cmd/config"
+	"twitter-clone/internal/models"
 	"twitter-clone/internal/repository"
 
 	"github.com/stretchr/testify/assert"
@@ -30,11 +31,16 @@ func Test_FollowUser_Success(t *testing.T) {
 		t.Fatal("Error creating tweets table")
 	}
 
+	follow := models.Followers{
+		FollowerUsername:  "pepe",
+		FollowingUsername: "alicia",
+	}
+
 	followService := NewFollowerService(&repository.Repository{Db: db})
 
 	//act
 
-	_, err = followService.FollowUser(ctx, "pepe", "alicia")
+	_, err = followService.FollowUser(ctx, follow)
 
 	//asserts
 
@@ -62,17 +68,22 @@ func Test_FollowUser_Error(t *testing.T) {
 		t.Fatal("Error creating tweets table")
 	}
 
+	follow := models.Followers{
+		FollowerUsername:  "pepe",
+		FollowingUsername: "alicia",
+	}
+
 	followService := NewFollowerService(&repository.Repository{Db: db})
 
 	//act
 
-	_, err = followService.FollowUser(ctx, "pepe", "alicia")
+	_, err = followService.FollowUser(ctx, follow)
 
 	if err != nil {
 		t.Fatal("Error following user")
 	}
 
-	_, err = followService.FollowUser(ctx, "pepe", "alicia")
+	_, err = followService.FollowUser(ctx, follow)
 
 	//asserts
 
@@ -100,9 +111,14 @@ func Test_Following_Success(t *testing.T) {
 		t.Fatal("Error creating tweets table")
 	}
 
+	follow := models.Followers{
+		FollowerUsername:  "pepe",
+		FollowingUsername: "alicia",
+	}
+
 	followService := NewFollowerService(&repository.Repository{Db: db})
 
-	_, err = followService.FollowUser(ctx, "pepe", "alicia")
+	_, err = followService.FollowUser(ctx, follow)
 
 	if err != nil {
 		t.Fatal("Error following user")

@@ -40,7 +40,7 @@ func Test_CreatePost_Success(t *testing.T) {
 
 	//act
 
-	createdPost, err := postService.CreatePost(ctx, tweet.User, tweet.Content)
+	createdPost, err := postService.CreatePost(ctx, tweet)
 
 	//asserts
 

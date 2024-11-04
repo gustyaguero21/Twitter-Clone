@@ -32,7 +32,9 @@ func (f *FollowerController) FollowUserController(ctx *gin.Context) {
 		return
 	}
 
-	_, err := f.Service.FollowUser(ctx, follower, followers.FollowingUsername)
+	followers.FollowerUsername = follower
+
+	_, err := f.Service.FollowUser(ctx, followers)
 
 	if err != nil {
 		ctx.JSON(400, gin.H{

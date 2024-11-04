@@ -7,9 +7,8 @@ import (
 )
 
 type Users struct {
-	ID       uuid.UUID   `json:"id"`
-	Username string      `json:"username"`
-	Follows  []Followers `json:"follows"`
+	ID       uuid.UUID `json:"id"`
+	Username string    `json:"username"`
 }
 
 type Followers struct {

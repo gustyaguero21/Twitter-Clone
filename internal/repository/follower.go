@@ -15,9 +15,9 @@ func NewFollowerRepository(repo Repository) *FollowerRepository {
 	return &FollowerRepository{Db: repo.Db}
 }
 
-func (fr *FollowerRepository) Follow(follower_username, following_username string) error {
+func (fr *FollowerRepository) Follow(followers models.Followers) error {
 
-	_, err := fr.Db.Exec(config.FollowUserQuery, follower_username, following_username)
+	_, err := fr.Db.Exec(config.FollowUserQuery, followers.FollowerUsername, followers.FollowingUsername)
 
 	if err != nil {
 		return fmt.Errorf("user already follow this user. Error: %v", err)
